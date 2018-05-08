@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
+    <script>
+
+        var jsResponse;
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : '843116579227221',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v3.0'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+
+        function getFBPage() {
+
+            var url = document.getElementById("test").value;
+            var token='EAACEdEose0cBADhnIUyMYOFLDuwjRxwzYDxcwUZBAVuyUliZB2Ik33U77tPXSnWxODu9QYk8eitAJvculIDjamnpEGfn7RKug6cMZA8lvpbJJ9PengVYDPpMN3t381yD5j965VbdgQxKkbBqMd82mVbtQA2EtIbJ6mw32rRfpc1ilNlJ9f4c9g7fMuBZCtEYcQshDituNAZDZD';
+
+            var arr=url.split("/");
+            PageName=arr[3];
+            PageCall='/'+PageName+'/feed';
+
+            console.log(PageCall);
+            FB.api(PageCall,{
+                access_token : token
+            },
+                function (response) {
+                jsResponse=response;
+                console.log(jsResponse);
+            });
+
+
+        }
+
+
+
+
+
+
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Bitnami: Open Source. Simplified</title>
+<link href="bitnami.css" media="all" rel="Stylesheet" type="text/css" />
+
+<body>
+
+
+    Name: <input type="text" id="test" name="urlpage">
+    <button onclick="getFBPage()">Mostra</button>
+
+
+
+
+
+
+</head>
+
+</body>
+</html>
