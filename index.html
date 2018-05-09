@@ -31,11 +31,11 @@
         function getFBPage() {
 
             var url = document.getElementById("test").value;
-            var token='EAACEdEose0cBADhnIUyMYOFLDuwjRxwzYDxcwUZBAVuyUliZB2Ik33U77tPXSnWxODu9QYk8eitAJvculIDjamnpEGfn7RKug6cMZA8lvpbJJ9PengVYDPpMN3t381yD5j965VbdgQxKkbBqMd82mVbtQA2EtIbJ6mw32rRfpc1ilNlJ9f4c9g7fMuBZCtEYcQshDituNAZDZD';
+            var token='EAACEdEose0cBAKF08AbQw0w5N3MaOAnZAWmXfvIrrs0jn6IjbKWQgEHRknlFk9QsXhddoMNrWS4IyepdkPtyz14UPqcZAnJvXdvhYH48OKEhMwMIp2iUZCR9LeHmwqtQ10g945tCZAji6LseXqMBgVDsfG5BAPcSYsPEajUJAlZCvW8ZAM87LdpIHTEt4yM5KEmMLFrqXjygZDZD';
 
             var arr=url.split("/");
             PageName=arr[3];
-            PageCall='/'+PageName+'/feed';
+            PageCall='/'+PageName+'/ratings';
 
             console.log(PageCall);
             FB.api(PageCall,{
