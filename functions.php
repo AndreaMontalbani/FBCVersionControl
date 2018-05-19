@@ -71,6 +71,18 @@ function insertPageID($pageid,$conn){
 
 }
 
+//prende la data di ultimo aggiornamento da db e aggiunge tutti i post successivi a quella data
+function updatePage()
+{
+
+
+}
+
+function fetchPageData()
+{
+
+}
+
 
 
 ?>
