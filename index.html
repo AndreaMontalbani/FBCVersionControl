@@ -1,9 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
+    <link rel="stylesheet" href="/css/bitnami.css">
 
     <script>
 
@@ -26,28 +27,52 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-
-
-        function getFBPage() {
-
-            var url = document.getElementById("test").value;
-            var token='EAACEdEose0cBAKF08AbQw0w5N3MaOAnZAWmXfvIrrs0jn6IjbKWQgEHRknlFk9QsXhddoMNrWS4IyepdkPtyz14UPqcZAnJvXdvhYH48OKEhMwMIp2iUZCR9LeHmwqtQ10g945tCZAji6LseXqMBgVDsfG5BAPcSYsPEajUJAlZCvW8ZAM87LdpIHTEt4yM5KEmMLFrqXjygZDZD';
-
-            var arr=url.split("/");
-            PageName=arr[3];
-            PageCall='/'+PageName+'/ratings';
-
-            console.log(PageCall);
-            FB.api(PageCall,{
-                access_token : token
-            },
-                function (response) {
-                jsResponse=response;
-                console.log(jsResponse);
+        $(document).ready(function(){
+            $("#FBurl").val("https://www.facebook.com/wholesomememers");
+            $("#myForm").submit(function() {
+                var formURL= $("#FBurl").val();
+               var tarr = formURL.split("/");
+               var sentName= tarr[3];
+               $("#pageName").val(sentName);
+               console.log($("#pageName").val());
+                return true;
             });
+        });
 
 
-        }
+
+
+
+            function getFBPage() {
+                //check if page is in the database
+                //if not add data also to database, creating a new entry
+
+
+                var token = 'EAACEdEose0cBADA9zDBKCpe59odj2QdcIRB52AZB1YZBUepl421ZCZBEw9vUFCgTL6kl5FdT9nf03guUZBv5FxFQOlVRskvvxliwrSfqh27Qqxd8FoKFarh7PeLtZBId9Cs6piGZB3fu5tJp3RMnk1LZCNm06kmKtMUQtsSLNTdAROZCivIhgKIwvshKHZC1ZAwaxqSG2APQ9crogZDZD';
+
+                PageName = $("#pageName").val(sentName);
+                PageCall = '/' + PageName + '/feed';
+
+
+                console.log(PageCall);
+                FB.api(PageCall, {
+                        access_token: token
+
+                    },
+                    function (response) {
+                        jsResponse = response;
+                        console.log(jsResponse.data);
+
+                        for (var i in jsResponse.data) {
+                            comment = jsResponse.data[i]["id"];
+
+                            console.log(getComments(comment));
+                        }
+
+                    });
+
+
+            }
 
 
 
@@ -55,17 +80,20 @@
 
 
     </script>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Bitnami: Open Source. Simplified</title>
-<link href="bitnami.css" media="all" rel="Stylesheet" type="text/css" />
-
-<body>
 
 
-    Name: <input type="text" id="test" name="urlpage">
-    <button onclick="getFBPage()">Mostra</button>
+
+<body >
+<div >
+<form action="loadPageData.php"  method="post" id="myForm">
+    Url pagina facebook: <input type="text" id="FBurl" name="FBurl" required/>
+
+    <input type="hidden" name="pageid" id="pageName" />
+    <input type="submit" value="Vai" />
 
 
+</form>
+</div>
 
 
 
